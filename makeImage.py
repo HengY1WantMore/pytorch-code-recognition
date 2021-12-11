@@ -28,14 +28,15 @@ def gen_text_and_image():
 if __name__ == '__main__':
     # -----------------------
     # 在这里开始设置参数
-    count = 48  # 这里设置想生成多少张图片
-    path = setting.PREDICT_DATASET_PATH  # 可以选择参数 TRAIN_DATASET_PATH TEST_DATASET_PATH PREDICT_DATASET_PATH
+    count = 1000  # 这里设置想生成多少张图片
+    path = setting.TRAIN_DATASET_PATH  # 可以选择参数 TRAIN_DATASET_PATH TEST_DATASET_PATH PREDICT_DATASET_PATH
     # -----------------------
 
     # 开始运行
     if not os.path.exists(path):
         print('[*] Ops! The Dir Do Not Exist!')
         os.makedirs(path)
+        print('[*] Make Dir Successfully!')
     print('[*] The ImageMake Mission Start!')
     for i in tqdm(range(count)):
         now = str(int(time.time()))

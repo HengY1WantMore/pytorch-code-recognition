@@ -10,7 +10,7 @@ import one_hot_encoding
 from tqdm import tqdm
 
 # -------------------------------
-model = 'model-84.pkl'  # 设置权重路径
+model = 'model.pkl'  # 设置权重路径
 # -------------------------------
 
 

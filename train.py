@@ -12,9 +12,9 @@ from test import validation
 from tqdm import tqdm
 import setting
 
-num_epochs = 100
-batch_size = 96  # 1024
-learning_rate = 0.0005  # 0.0001
+num_epochs = 30
+batch_size = 96
+learning_rate = 0.0005
 saveModelName = 'model.pkl'
 
 
