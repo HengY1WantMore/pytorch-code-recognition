@@ -5,13 +5,17 @@ import random
 import time
 import setting
 import os
+from tqdm import tqdm
 
+
+# 随机生成字母
 def random_captcha():
-    text = []
-    for i in range(setting.MAX_CAPTCHA):
+    oneText = []
+    for _ in range(setting.MAX_CAPTCHA):
         c = random.choice(setting.ALL_CHAR_SET)
-        text.append(c)
-    return ''.join(text)
+        oneText.append(c)
+    return ''.join(oneText)
+
 
 # 生成字符对应的验证码
 def gen_text_and_image():
@@ -20,15 +24,22 @@ def gen_text_and_image():
     image = Image.open(image.generate(text))
     return text, image
 
+
 if __name__ == '__main__':
-    count = 90000
-    path = setting.TRAIN_DATASET_PATH    #通过改变此处目录，以生成 训练、测试和预测用的验证码集
+    # -----------------------
+    # 在这里开始设置参数
+    count = 48  # 这里设置想生成多少张图片
+    path = setting.PREDICT_DATASET_PATH  # 可以选择参数 TRAIN_DATASET_PATH TEST_DATASET_PATH PREDICT_DATASET_PATH
+    # -----------------------
+
+    # 开始运行
     if not os.path.exists(path):
+        print('[*] Ops! The Dir Do Not Exist!')
         os.makedirs(path)
-    for i in range(count):
+    print('[*] The ImageMake Mission Start!')
+    for i in tqdm(range(count)):
         now = str(int(time.time()))
         text, image = gen_text_and_image()
-        filename = text+'_'+now+'.png'
-        image.save(path  + os.path.sep +  filename)
-        print('saved %d : %s' % (i+1,filename))
-
+        filename = text + '_' + now + '.png'
+        image.save(path + os.path.sep + filename)
+    print(f'[*] The ImageMake Mission Done! See in {path}.')
