@@ -36,7 +36,7 @@ Test set: 1k
 
 - **某效果图**：
 
-<img src="/Users/jj/Library/Application Support/typora-user-images/image-20211211200828095.png" alt="image-20211211200828095" style="zoom:50%;" />
+<img src="https://dailypic.hengyimonster.top/image-20211211200828095.png" alt="image-20211211200828095" style="zoom:50%;" />
 
 ##  快速开始
 
@@ -44,7 +44,7 @@ Test set: 1k
 
 到setting.py下设置`CHOOSE_LIST`以及`MAX_CAPTCHA`
 
-<img src="/Users/jj/Library/Application Support/typora-user-images/image-20211211201535432.png" alt="image-20211211201535432" style="zoom:30%;" />
+<img src="https://dailypic.hengyimonster.top/image-20211211201535432.png" alt="image-20211211201535432" style="zoom:30%;" />
 
 - **步骤二：创建属于自己的训练集**
 
@@ -64,7 +64,7 @@ $ python makeImage.py
 
 
 
-<img src="/Users/jj/Library/Application Support/typora-user-images/image-20211211201749408.png" alt="image-20211211201749408" style="zoom:30%;" />
+<img src="https://dailypic.hengyimonster.top/image-20211211201749408.png" alt="image-20211211201749408" style="zoom:30%;" />
 
 - **步骤三：训练模型**
 
