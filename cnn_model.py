@@ -2,7 +2,6 @@
 import torch.nn as nn
 import setting
 
-
 # CNN Model (2 conv layer)
 class CNN(nn.Module):
     def __init__(self):
@@ -26,11 +25,11 @@ class CNN(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(2))
         self.fc = nn.Sequential(
-            nn.Linear((setting.IMAGE_WIDTH // 8) * (setting.IMAGE_HEIGHT // 8) * 64, 1024),
+            nn.Linear((setting.IMAGE_WIDTH//8)*(setting.IMAGE_HEIGHT//8)*64, 1024),
             nn.Dropout(0.5),  # drop 50% of the neuron
             nn.ReLU())
         self.rfc = nn.Sequential(
-            nn.Linear(1024, setting.MAX_CAPTCHA * setting.ALL_CHAR_SET_LEN),
+            nn.Linear(1024, setting.MAX_CAPTCHA*setting.ALL_CHAR_SET_LEN),
         )
 
     def forward(self, x):
@@ -41,3 +40,4 @@ class CNN(nn.Module):
         out = self.fc(out)
         out = self.rfc(out)
         return out
+

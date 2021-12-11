@@ -1,5 +1,8 @@
 # -*- coding: UTF-8 -*-
+from datetime import time
+from time import time as randomTime
 import os
+from random import random
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
@@ -7,10 +10,11 @@ import my_dataset
 from cnn_model import CNN
 from test import validation
 from tqdm import tqdm
+import setting
 
-num_epochs = 15
-batch_size = 128  # 1024
-learning_rate = 0.01  # 0.0001
+num_epochs = 100
+batch_size = 96  # 1024
+learning_rate = 0.0005  # 0.0001
 saveModelName = 'model.pkl'
 
 
@@ -18,7 +22,7 @@ saveModelName = 'model.pkl'
 # Time: 2021/12/10 9:06 上午
 # Author: HengYi
 def handleDir():
-    dirs = './result'
+    dirs = os.path.join(setting.CURRENT_PATH, 'result')
     if not os.path.exists(dirs):
         os.makedirs(dirs)
         print('[*] Make ./result dir done.')
@@ -27,18 +31,17 @@ def handleDir():
 # Note: 计算正确率
 # Time: 2021/12/10 9:11 上午
 # Author: HengYi
-def getCorrect():
+def getCorrect(modelPath):
     print('[*] Start to get correctRate.')
     cnn = CNN()
     cnn.eval()
-    modelPath = 'result/' + saveModelName
     if not torch.cuda.is_available():
         cnn.load_state_dict(torch.load(modelPath, map_location='cpu'))
     else:
         cnn.load_state_dict(torch.load(modelPath))
     test_dataloader = my_dataset.get_test_data_loader()
     correctNum, totalNum = validation(cnn, test_dataloader)
-    return 100 * correctNum / totalNum
+    return round(100 * correctNum / totalNum , 3)
 
 
 # Note: 作图
@@ -68,12 +71,12 @@ def main():
     criterion = nn.MultiLabelSoftMarginLoss()
     optimizer = torch.optim.Adam(cnn.parameters(), lr=learning_rate)
     handleDir()
-    savePath = './result/' + saveModelName
+    savePath = os.path.join(setting.CURRENT_PATH, 'result',saveModelName)
 
     # 开始训练
-    train_dataloader = my_dataset.get_train_data_loader()
-    correctRateArray = []
-    epochArray = []
+    train_dataloader = my_dataset.get_train_data_loader(batch_size)
+    correctRateArray = [0]
+    epochArray = [0]
     for epoch in range(num_epochs):
         epoch += 1
         loss = ''
@@ -91,13 +94,19 @@ def main():
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-        torch.save(cnn.state_dict(), savePath)  # 每个epoch都保存一次
-        correctRate = getCorrect()  # 计算正确率
+        timePath = os.path.join(setting.CURRENT_PATH, 'result',str(int(randomTime())) + '-model.pkl')
+        torch.save(cnn.state_dict(), timePath)  # 每个epoch都保存一次
+        correctRate = getCorrect(timePath)  # 计算正确率
         print("[*] epoch:", epoch, "loss:", loss.item(), "correctRate:", str(correctRate) + '%')
         epochArray.append(epoch)
         correctRateArray.append(correctRate)
+        if correctRate >= max(correctRateArray):
+            if os.path.exists(os.path.join(setting.CURRENT_PATH, 'result',saveModelName)):
+                os.remove(os.path.join(setting.CURRENT_PATH, 'result',saveModelName))
+            os.rename(timePath,os.path.join(setting.CURRENT_PATH, 'result',saveModelName))
+        else:
+            os.remove(timePath)
     makeRateImage(epochArray, correctRateArray)
-    torch.save(cnn.state_dict(), savePath)
     print("[*] Save Last Model and Png in ./result")
 
 
