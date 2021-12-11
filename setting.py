@@ -21,4 +21,3 @@ IMAGE_WIDTH = 160
 TRAIN_DATASET_PATH = 'dataset' + os.path.sep + 'train'
 TEST_DATASET_PATH = 'dataset' + os.path.sep + 'test'
 PREDICT_DATASET_PATH = 'dataset' + os.path.sep + 'predict'
-CURRENT_PATH = os.path.split((os.path.realpath(__file__)))[0]

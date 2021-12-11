@@ -13,11 +13,16 @@ model = 'model-84.pkl'  # 设置权重路径
 # -------------------------------
 
 
+# -------------------------------
+model = 'model.pkl'  # 设置权重路径
+# -------------------------------
+
+
 def main():
     print("[*] Start to load CNN Net!")
     cnn = CNN()
     cnn.eval()
-    modelPath = os.path.join(setting.CURRENT_PATH, 'result', model)
+    modelPath = 'result/' + model
     # 判断是否存在GPU
     if not torch.cuda.is_available():
         cnn.load_state_dict(torch.load(modelPath, map_location='cpu'))
