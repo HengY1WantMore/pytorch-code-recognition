@@ -3,7 +3,7 @@ import os
 
 
 #--------------设置参数-----------------
-CHOOSE_LIST = [0, 1, 2]  # 设置要训练的集合 [NUMBER, ALPHABET, LOWER_ALPHABET] 下标
+CHOOSE_LIST = [0, 1]  # 设置要训练的集合 [NUMBER, ALPHABET, LOWER_ALPHABET] 下标
 MAX_CAPTCHA = 4 # 设置验证码长度
 #---------------------------------------
 

@@ -13,8 +13,8 @@ from tqdm import tqdm
 import setting
 
 num_epochs = 100
-batch_size = 84
-learning_rate = 0.000555      # 0.0001
+batch_size = 85
+learning_rate = 0.0005
 saveModelName = 'model.pkl'
 
 
