@@ -9,7 +9,7 @@ from cnn_model import CNN
 import os
 
 # -------------------------------
-model = 'model.pkl'  # 设置权重路径
+model = 'model-84'  # 设置权重路径
 # -------------------------------
 
 

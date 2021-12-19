@@ -8,8 +8,9 @@ import setting
 
 class mydataset(Dataset):
 
-    def __init__(self, folder, transform=None):
+    def __init__(self, folder, transform=None):  # 暂停transform传入的使用
         self.train_image_file_paths = [os.path.join(folder, image_file) for image_file in os.listdir(folder)]
+        # self.transform = transforms.Compose([transforms.ToTensor(),transforms.Lambda(lambda x: x.repeat(1,1,1)),]) # 改为3层
         self.transform = transform
 
     def __len__(self):

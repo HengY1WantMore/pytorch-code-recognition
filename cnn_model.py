@@ -2,7 +2,6 @@
 import torch.nn as nn
 import setting
 
-# CNN Model (2 conv layer)
 class CNN(nn.Module):
     def __init__(self):
         super(CNN, self).__init__()
@@ -40,4 +39,3 @@ class CNN(nn.Module):
         out = self.fc(out)
         out = self.rfc(out)
         return out
-

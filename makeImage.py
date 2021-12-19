@@ -28,8 +28,8 @@ def gen_text_and_image():
 if __name__ == '__main__':
     # -----------------------
     # 在这里开始设置参数
-    count = 1000  # 这里设置想生成多少张图片
-    path = setting.TRAIN_DATASET_PATH  # 可以选择参数 TRAIN_DATASET_PATH TEST_DATASET_PATH PREDICT_DATASET_PATH
+    count = 4000  # 这里设置想生成多少张图片
+    path = setting.TEST_DATASET_PATH  # 可以选择参数 TRAIN_DATASET_PATH TEST_DATASET_PATH PREDICT_DATASET_PATH
     # -----------------------
 
     # 开始运行
